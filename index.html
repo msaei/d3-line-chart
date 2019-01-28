@@ -10,7 +10,37 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="grey darken-4">
+    <div class="nav z-depth-0">
+        <div class="section center">
+            <h3 class="white-text center">
+                - The Logger -
+            </h3>
+        </div>
+    </div>
+    <div class="section center">
+        <p class="grey-text flow-text">
+            A dayli code tracher for 100ees
+        </p>
+    </div>
+    <div class="container section">
+        <div class="row">
+            <div class="col s12 l5">
+                <button class="active" code-activity="coding">Coding</button>
+                <button code-activity="studying">studying</button>
+                <button code-activity="hacking">hacking</button>
+                <button code-activity="blogging">blogging</button>
+            </div>
+            <div class="col s12 l6 push-l1">
+                <div class="canvas"></div>
+            </div>
+        </div>
+        <form class="col m6 push-m3">
+            <p class="flow-text grey-text center">How much <span> coding </span> have you done today?</p>
+            <input type="text" class="grey-text" id="coding" placeholder="time in minutes">
+            <p class="pink-text text-lighten-1 error">error</p>
+        </form>
+    </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="index.js"></script>
