@@ -22,3 +22,24 @@ btns.forEach(btn => {
         formAct.textContent = activity;
     })
 })
+
+// form submit
+form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const amount = parseInt(input.value);
+    if (amount) {
+        db.collection('activity').add({
+            amount,
+            activity,
+            date: new Date().toString()
+        }).then(() => {
+            error.textContent = '';
+            input.value = '';
+        })
+    } else {
+        error.textContent = 'please enter a valid amount';
+    }
+
+
+})
