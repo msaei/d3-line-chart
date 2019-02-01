@@ -1,6 +1,6 @@
 const margin = { top: 40, right: 20, bottom: 50, left: 100 };
 const graphWidth = 560 - margin.left - margin.right;
-const graphHeight = 400 - marigin.top - margin.bottom;
+const graphHeight = 400 - margin.top - margin.bottom;
 
 const svg = d3.select('.canvas')
     .append('svg')
@@ -24,8 +24,21 @@ const xAxisGroup = graph.append('g')
 const yAxisGroup = graph.append('g')
     .attr('class', 'y-axiz')
 
+// update graph with realtime data
 const update = (data) => {
-    console.log(data);
+    // set scale domaind
+    x.domain(d3.extent(data, d => new Date(d.date)));
+    y.domain([0, d3.max(data, d => d.amount)]);
+
+    // create axis
+    const xAxis = d3.axisBottom(x)
+        .ticks(4)
+    const yAxis = d3.axisLeft(y)
+        .ticks(4)
+
+    // call axis
+    xAxisGroup.call(xAxis)
+    yAxisGroup.call(yAxis)
 }
 
 // data and firestore
