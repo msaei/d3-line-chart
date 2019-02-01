@@ -22,7 +22,7 @@ const xAxisGroup = graph.append('g')
     .attr('transform', `translate(0, ${graphHeight})`)
 
 const yAxisGroup = graph.append('g')
-    .attr('class', 'y-axiz')
+    .attr('class', 'y-axis')
 
 // update graph with realtime data
 const update = (data) => {
@@ -33,12 +33,19 @@ const update = (data) => {
     // create axis
     const xAxis = d3.axisBottom(x)
         .ticks(4)
+        .tickFormat(d3.timeFormat('%b %d'));
     const yAxis = d3.axisLeft(y)
         .ticks(4)
+        .tickFormat(d => d + 'm')
 
     // call axis
     xAxisGroup.call(xAxis)
     yAxisGroup.call(yAxis)
+
+    // rotate xAxis test
+    xAxisGroup.selectAll('text')
+        .attr('transform', 'rotate(-40)')
+        .attr('text-anchor', 'end')
 }
 
 // data and firestore
