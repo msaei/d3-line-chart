@@ -4,7 +4,7 @@ const formAct = document.querySelector('form span');
 const input = document.querySelector('input');
 const error = document.querySelector('.error');
 
-var activity = 'Coding';
+var activity = 'coding';
 
 btns.forEach(btn => {
     btn.addEventListener('click', e => {
