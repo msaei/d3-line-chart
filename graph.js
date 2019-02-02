@@ -26,7 +26,9 @@ const yAxisGroup = graph.append('g')
 
 // update graph with realtime data
 const update = (data) => {
-    // set scale domaind
+    // filter data depends on activity selected
+    data = data.filter(item => item.activity == activity)
+        // set scale domaind
     x.domain(d3.extent(data, d => new Date(d.date)));
     y.domain([0, d3.max(data, d => d.amount)]);
 
@@ -34,19 +36,20 @@ const update = (data) => {
     const circles = graph.selectAll('circle')
         .data(data)
 
-    // add new points
-    circles.enter()
-        .append('circle')
-        .attr('r', 4)
-        .attr('cx', d => x(new Date(d.date)))
-        .attr('cy', d => y(d.amount))
-        .attr('fill', '#ccc');
     //update current points
     circles
         .attr('cx', d => x(new Date(d.date)))
         .attr('cy', d => y(d.amount))
         //remove deleted points
     circles.exit().remove()
+        // add new points
+    circles.enter()
+        .append('circle')
+        .attr('r', 4)
+        .attr('cx', d => x(new Date(d.date)))
+        .attr('cy', d => y(d.amount))
+        .attr('fill', '#ccc');
+
 
     // create axis
     const xAxis = d3.axisBottom(x)
