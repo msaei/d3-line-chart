@@ -30,6 +30,24 @@ const update = (data) => {
     x.domain(d3.extent(data, d => new Date(d.date)));
     y.domain([0, d3.max(data, d => d.amount)]);
 
+    // create circles
+    const circles = graph.selectAll('circle')
+        .data(data)
+
+    // add new points
+    circles.enter()
+        .append('circle')
+        .attr('r', 4)
+        .attr('cx', d => x(new Date(d.date)))
+        .attr('cy', d => y(d.amount))
+        .attr('fill', '#ccc');
+    //update current points
+    circles
+        .attr('cx', d => x(new Date(d.date)))
+        .attr('cy', d => y(d.amount))
+        //remove deleted points
+    circles.exit().remove()
+
     // create axis
     const xAxis = d3.axisBottom(x)
         .ticks(4)
