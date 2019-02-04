@@ -24,15 +24,30 @@ const xAxisGroup = graph.append('g')
 const yAxisGroup = graph.append('g')
     .attr('class', 'y-axis')
 
+//d3 line path genarator
+const line = d3.line()
+    .x(function(d) { return x(new Date(d.date)) })
+    .y(function(d) { return y(d.amount) });
+// line path element
+const path = graph.append('path');
+
 // update graph with realtime data
 const update = (data) => {
     // filter data depends on activity selected
     data = data.filter(item => item.activity == activity)
-        // set scale domaind
+        // sort data acording to date
+    data.sort((a, b) => new Date(a.date) - new Date(b.date));
+    // set scale domaind
     x.domain(d3.extent(data, d => new Date(d.date)));
     y.domain([0, d3.max(data, d => d.amount)]);
 
-    // create circles
+    //update path element
+    path.data([data])
+        .attr('fill', 'none')
+        .attr('stroke', 'green')
+        .attr('stroke-width', 2)
+        .attr('d', line)
+        // create circles
     const circles = graph.selectAll('circle')
         .data(data)
 
