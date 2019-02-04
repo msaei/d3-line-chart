@@ -64,7 +64,13 @@ const update = (data) => {
         .attr('cx', d => x(new Date(d.date)))
         .attr('cy', d => y(d.amount))
         .attr('fill', '#ccc');
-
+    graph.selectAll('circle')
+        .on('mouseover', (d, i, n) => {
+            d3.select(n[i])
+                .transition().duration(200)
+                .attr('r', 8)
+                .attr('fill', '#fff')
+        })
 
     // create axis
     const xAxis = d3.axisBottom(x)
