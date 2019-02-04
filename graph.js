@@ -71,6 +71,12 @@ const update = (data) => {
                 .attr('r', 8)
                 .attr('fill', '#fff')
         })
+        .on('mouseleave', (d, i, n) => {
+            d3.select(n[i])
+                .transition().duration(200)
+                .attr('r', 4)
+                .attr('fill', '#ccc')
+        })
 
     // create axis
     const xAxis = d3.axisBottom(x)
