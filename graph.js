@@ -31,6 +31,23 @@ const line = d3.line()
 // line path element
 const path = graph.append('path');
 
+//create dotted line group and append to graph
+const dottedLines = graph.append('g')
+    .attr('class', 'lines')
+    .style('opacity', 0);
+
+//crate x doted line and append to dotted line
+const xDottedLine = dottedLines.append('line')
+    .attr('stroke', '#aaa')
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', 4);
+//crate y doted line and append to dotted line
+const xDottedLine = dottedLines.append('line')
+    .attr('stroke', '#aaa')
+    .attr('stroke-width', 1)
+    .attr('stroke-dasharray', 4);
+
+
 // update graph with realtime data
 const update = (data) => {
     // filter data depends on activity selected
